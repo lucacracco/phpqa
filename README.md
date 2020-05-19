@@ -20,7 +20,7 @@ Docker image for running:
 
     docker run --rm -u $UID -v $PWD:/app lucacracco/phpqa-drupal phpqa --config=/phpqa/drupal8
 
-An example configuration files will found in [default-config](default-config).
+An example configuration files will found in [example-config](example-config).
 
 **cloc**
 
