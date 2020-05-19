@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<psalm
+        totallyTyped="false"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config file:///app/vendor/vimeo/psalm/config.xsd">
+
+    <projectFiles>
+        <ignoreFiles allowMissingFiles="true">
+            <directory name="node_modules" />
+            <directory name="web/modules/custom/*/tests" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info" />
+
+        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+        <DeprecatedMethod errorLevel="info" />
+        <DeprecatedProperty errorLevel="info" />
+        <DeprecatedClass errorLevel="info" />
+        <DeprecatedInterface errorLevel="info" />
+        <MissingClosureReturnType errorLevel="info" />
+        <MissingReturnType errorLevel="info" />
+        <MissingPropertyType errorLevel="info" />
+        <InvalidDocblock errorLevel="info" />
+        <MisplacedRequiredParam errorLevel="info" />
+        <PropertyNotSetInConstructor errorLevel="info" />
+        <MissingConstructor errorLevel="info" />
+        <MissingClosureParamType errorLevel="info" />
+        <MissingParamType errorLevel="info" />
+        <RedundantCondition errorLevel="info" />
+        <DocblockTypeContradiction errorLevel="info" />
+        <RedundantConditionGivenDocblockType errorLevel="info" />
+        <UnresolvableInclude errorLevel="info" />
+        <RawObjectIteration errorLevel="info" />
+
+        <!-- Suppress some errors -->
+        <!-- @see https://github.com/vimeo/psalm/blob/master/docs/dealing_with_code_issues.md -->
+
+        <!-- Do not take into account errors with Drupal\Tests\UnitTestCase -->
+        <!-- @todo create a tests folder before de-comment this line -->
+        <!--<UndefinedClass>-->
+        <!--    <errorLevel type="suppress">-->
+        <!--        <directory name="web/modules/custom/*/tests" />-->
+        <!--    </errorLevel>-->
+        <!--</UndefinedClass>-->
+
+        <!-- Do not take into account undefined methods in tests (results from the above) -->
+        <!-- @todo create a tests folder before de-comment this line -->
+        <!--<UndefinedMethod>-->
+        <!--    <errorLevel type="suppress">-->
+        <!--        <directory name="web/modules/custom/*/tests" />-->
+        <!--    </errorLevel>-->
+        <!--</UndefinedMethod>-->
+
+    </issueHandlers>
+</psalm>

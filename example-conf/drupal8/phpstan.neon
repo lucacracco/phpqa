@@ -1,0 +1,16 @@
+parameters:
+  bootstrap: %currentWorkingDirectory%/vendor/autoload.php
+  customRulesetUsed: true
+  reportUnmatchedIgnoredErrors: false
+  # Ignore phpstan-drupal extension's rules.
+  ignoreErrors:
+    - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
+    - '#Plugin definitions cannot be altered.#'
+    - '#Missing cache backend declaration for performance.#'
+    - '#Plugin manager has cache backend specified but does not declare cache tags.#'
+  drupal:
+    drupal_root: %currentWorkingDirectory%/web
+includes:
+    # Composer global libraries in image is installed in /tmp.
+    - /tmp/vendor/mglaman/phpstan-drupal/extension.neon
+    - /tmp/vendor/phpstan/phpstan-deprecation-rules/rules.neon

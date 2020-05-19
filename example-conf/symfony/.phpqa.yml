@@ -1,0 +1,75 @@
+phpqa:
+  # Directories to analyze.
+  analyzedDirs: src
+  # Where place the reports.
+  buildDir: reports
+  # Ignore dirs and files.
+  ignoredDirs: node_modules
+  ignoredFiles: ""
+  # Tools.
+  tools:
+    - phploc
+    - phpcpd
+    - phpcs
+    - php-cs-fixer
+    - pdepend
+    - phpmd
+    - phpmetrics
+    - security-checker
+    # Require composer autoload. Active only if have installed libraries dependencies of project.
+    - phpstan
+    - psalm
+  # Extension.
+  extensions:
+    - php
+  # Configurations.
+  report: true
+  #verbose: true
+  #execution: no-parallel
+
+#phpcs:
+  # alternatively you can use an array to define multiple standards (https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage#specifying-a-coding-standard)
+  standard: PSR12, Squiz, PEAR, PSR1, Zend, PSR2, .phpcs.xml
+  # number of allowed errors is compared with warnings+errors, or just errors from checkstyle.xml
+  ignoreWarnings: false
+  # https://github.com/squizlabs/PHP_CodeSniffer/wiki/Reporting
+  reports:
+    cli:
+      - full
+    file:
+      checkstyle: checkstyle.xml
+
+php-cs-fixer:
+  rules: '@PSR1,@PSR2,@Symfony,@PhpCsFixer,@DoctrineAnnotation'
+  isDryRun: true
+
+phpmd:
+  # alternatively you can use an array to define multiple rule sets (https://phpmd.org/documentation/index.html#using-multiple-rule-sets)
+  standard: phpmd.xml
+
+pdepend:
+# coverageReport: build/coverage-clover.xml
+
+phpcpd:
+  minLines: 5
+  minTokens: 70
+
+phpmetrics:
+  # v1
+  config: null
+  # v2
+  git: false
+  # junit: build/log-junit.xml
+  # composer: composer.json
+
+phpstan:
+  level: 3
+  # https://github.com/phpstan/phpstan#configuration
+  standard: phpstan.neon
+
+psalm:
+  config: .psalm.xml
+  deadCode: false
+  threads: 1
+  showInfo: true
+  allowMissingFiles: true

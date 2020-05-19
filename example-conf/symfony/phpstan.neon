@@ -1,0 +1,6 @@
+parameters:
+  bootstrap: %currentWorkingDirectory%/vendor/autoload.php
+  customRulesetUsed: true
+  reportUnmatchedIgnoredErrors: false
+includes:
+    - /tmp/vendor/phpstan/phpstan-deprecation-rules/rules.neon
