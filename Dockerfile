@@ -1,5 +1,5 @@
-FROM composer:latest
-MAINTAINER Luca Cracco <lucacracco>
+FROM composer:1.10.17
+LABEL Luca Cracco <lucacracco>
 
 # Install dependeciens for phpqa.
 RUN apk add --update libxslt-dev && \
