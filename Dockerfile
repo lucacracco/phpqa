@@ -1,4 +1,4 @@
-FROM composer:1.10.17
+FROM composer:1
 LABEL Luca Cracco <lucacracco>
 
 # Install dependeciens for phpqa.
