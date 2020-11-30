@@ -1,4 +1,4 @@
-FROM composer:1.10.17
+FROM composer:2
 LABEL Luca Cracco <lucacracco>
 
 # Install dependeciens for phpqa.
@@ -7,9 +7,6 @@ RUN apk add --update libxslt-dev && \
 
 # Install https://github.com/AlDanial/cloc.
 RUN apk add cloc --update
-
-# Install https://github.com/hirak/prestissimo.
-RUN composer global require hirak/prestissimo --update-no-dev
 
 # Install tools.
 RUN composer global require  \
