@@ -17,6 +17,8 @@ RUN composer global require  \
     # Install https://github.com/EdgedesignCZ/phpqa.
     edgedesign/phpqa \
 
+    sebastian/phpcpd:5.0.2 \
+
     # Suggestions tools (see https://github.com/EdgedesignCZ/phpqa/blob/master/bin/suggested-tools.sh)
     jakub-onderka/php-parallel-lint \
     jakub-onderka/php-console-highlighter \
