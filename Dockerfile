@@ -12,19 +12,25 @@ RUN apk add cloc --update
 RUN composer global require  \
 
     # Install https://github.com/EdgedesignCZ/phpqa.
-    edgedesign/phpqa:v1.23.3 \
+    edgedesign/phpqa:1.23.3 \
 
     # Suggestions tools (see https://github.com/EdgedesignCZ/phpqa/blob/master/bin/suggested-tools.sh)
-    jakub-onderka/php-parallel-lint:v1.0.0 \
-    jakub-onderka/php-console-highlighter:v0.4 \
+
+    # TODO: change with php-parallel-lint/php-parallel-lint.
+    jakub-onderka/php-parallel-lint:1.0.0 \
+    # TODO: change with php-parallel-lint/php-console-highlighter.
+    jakub-onderka/php-console-highlighter:0.4 \
+    # Fixed for compatibility with mglaman/phpstan-drupal.
     phpstan/phpstan:0.12.26 \
-    nette/neon:v3.2.1 \
-    friendsofphp/php-cs-fixer:v2.16.7 \
+    nette/neon:3.2.1 \
+    friendsofphp/php-cs-fixer:2.16.7 \
     vimeo/psalm:4.2.1 \
-    sensiolabs/security-checker:6.0 \
+    sensiolabs/security-checker:6.0.3 \
+
+    sebastian/phpcpd:4.1.0 \
 
     # Install https://github.com/Dealerdirect/phpcodesniffer-composer-installer.
-    dealerdirect/phpcodesniffer-composer-installer:v0.7.0 \
+    dealerdirect/phpcodesniffer-composer-installer:0.7.1 \
 
     # Install https://git.drupalcode.org/project/coder.
     drupal/coder:8.3.11 \
@@ -39,7 +45,7 @@ RUN composer global require  \
     phpstan/phpstan-symfony:0.12.10 \
 
     # Install https://github.com/psalm/psalm-plugin-symfony.
-    psalm/plugin-symfony:v2.0.2
+    psalm/plugin-symfony:2.0.2
 
 RUN composer global clearcache
 
