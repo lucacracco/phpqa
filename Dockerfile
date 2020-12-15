@@ -12,34 +12,37 @@ RUN apk add cloc --update
 RUN composer global require  \
 
     # Install https://github.com/EdgedesignCZ/phpqa.
-    edgedesign/phpqa:1.23.3 \
+    edgedesign/phpqa:^1.23 \
 
     # Suggestions tools (see https://github.com/EdgedesignCZ/phpqa/blob/master/bin/suggested-tools.sh)
 
     # TODO: change with php-parallel-lint/php-parallel-lint.
-    jakub-onderka/php-parallel-lint:1.0.0 \
+    jakub-onderka/php-parallel-lint:^1.0 \
     # TODO: change with php-parallel-lint/php-console-highlighter.
-    jakub-onderka/php-console-highlighter:0.4 \
+    jakub-onderka/php-console-highlighter:^0.4.0 \
     # Fixed for compatibility with mglaman/phpstan-drupal.
-    phpstan/phpstan:0.12.26 \
-    nette/neon:3.2.1 \
-    friendsofphp/php-cs-fixer:2.16.7 \
-    vimeo/psalm:4.2.1 \
-    sensiolabs/security-checker:6.0.3 \
+    phpstan/phpstan:0.12.42 \
+    nette/neon:^3.2 \
+    vimeo/psalm:^4.3 \
+    sensiolabs/security-checker:^6.0 \
+    pdepend/pdepend: ^2.8 \
+    phploc/phploc: ^4.0 \
+    phpmd/phpmd: ^2.9 \
+    phpmetrics/phpmetrics: ^2.7 \
 
-    sebastian/phpcpd:4.1.0 \
+    sebastian/phpcpd:^4.1 \
 
     # Install https://github.com/Dealerdirect/phpcodesniffer-composer-installer.
-    dealerdirect/phpcodesniffer-composer-installer:0.7.1 \
+    dealerdirect/phpcodesniffer-composer-installer:^0.7.1 \
 
     # Install https://git.drupalcode.org/project/coder.
-    drupal/coder:8.3.11 \
+    drupal/coder:^8.3 \
 
     # Install https://github.com/mglaman/phpstan-drupal.
-    mglaman/phpstan-drupal:0.12.6 \
+    mglaman/phpstan-drupal:^0.12.6 \
 
     # Install https://github.com/phpstan/phpstan-deprecation-rules.
-    phpstan/phpstan-deprecation-rules:0.12.5 \
+    phpstan/phpstan-deprecation-rules:~0.12.0 \
 
     # Install https://github.com/phpstan/phpstan-symfony.
     phpstan/phpstan-symfony:0.12.10 \
