@@ -1,27 +1,39 @@
 # Docker PHP Quality Tools for Drupal8/Symfony project.
 
-Docker image for running:
+```shell
+docker run -it --rm -u $UID -v $PWD:/project -w /project lucacracco/phpqa bash
+```
 
-* [PHP QA Tools](https://edgedesigncz.github.io/phpqa/)
-* [PHPloc](https://github.com/sebastianbergmann/phploc)
-* [Count Lines of Code (cloc)](https://github.com/AlDanial/cloc)
+You might want to tweak this command to your needs and create an alias for convenience:
+
+```shell
+alias phpqa='docker run --init -it --rm -v "$(pwd):/project" -w /project lucacracco/phpqa'
+```
+
+Add it to your `~/.bashrc` so it's defined every time you start a new terminal session.
+Now the command becomes a lot simpler:
+
+```shell
+phpqa phpcs --standard=Drupal /file/to/drupal/example_module
+```
+
 
 # Examples
 
-**phpqa**
+**phpcs**
 
-    docker run --rm -u $UID -v $PWD:/app lucacracco/phpqa-drupal phpqa --report --ignoredDirs vendor,node_modules --analyzedDirs web/modules/custom
+    phpqa phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml /file/to/drupal/example_module
+    phpqa phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml /file/to/drupal/example_module
+    phpqa phpcs --standard=/phpqa/drupal8/.phpcs.xml --report=summary -p /file/to/drupal/example_module
 
-**phpqa with custom configurations**
+**phpcbf**
+    
+    phpqa phpcbf --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml /file/to/drupal/example_module
 
-    docker run --rm -u $UID -v $PWD:/app lucacracco/phpqa-drupal phpqa --config=folder/with/configurations
+**phpcpd**
+    
+    phpqa phpcpd --min-lines 5 --min-tokens 70 --log-pmd "reports/phpcpd.xml" /file/to/drupal/example_module
 
-**phpqa with custom configurations example for Drupal8**
+**phpmetrics**
 
-    docker run --rm -u $UID -v $PWD:/app lucacracco/phpqa-drupal phpqa --config=/phpqa/drupal8
-
-An example configuration files will found in [example-config](example-config).
-
-**cloc**
-
-    docker run --rm -u $UID -v $PWD:/app lucacracco/phpqa-drupal cloc web/modules/custom
+    phpqa phpmetrics --extensions=php,inc,module,install,test,profile,theme --report-html="reports/phpmetrics/" --report-violations="reports/phpmetrics.xml" /file/to/drupal/example_module
