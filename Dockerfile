@@ -34,7 +34,11 @@ RUN composer global require \
     vimeo/psalm \
     php-parallel-lint/php-parallel-lint \
     php-parallel-lint/php-console-highlighter \
-    phpstan/phpstan-deprecation-rules
+    phpstan/phpstan-deprecation-rules \
+    behat/behat \
+    icanhazstring/composer-unused \
+    phpbench/phpbench \
+    rskuipers/php-assumptions
 
 # For Drupal.
 RUN composer global require \
