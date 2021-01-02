@@ -1,0 +1,65 @@
+phpqa:
+  analyzedDirs: ./web/modules/custom
+  buildDir: reports
+  ignoredDirs: tests,node_modules
+  ignoredFiles: ""
+  report: true
+  # verbose: true
+  # execution: no-parallel
+  tools:
+    - phpmetrics
+    - phploc
+    - phpcs
+    - phpmd
+    - pdepend
+    - phpcpd
+    - security-checker
+    #    # Require composer autoload. Active only if have installed libraries dependencies of project.
+    - phpstan
+    - psalm
+  extensions:
+    - php
+    - inc
+    - module
+    - install
+    - test
+    - profile
+    - theme
+    - info
+    - txt
+    - md
+
+phpcs:
+  standard: .phpcs.xml
+  ignoreWarnings: true
+  # https://github.com/squizlabs/PHP_CodeSniffer/wiki/Reporting
+  reports:
+    cli:
+      - full
+    file:
+      checkstyle: checkstyle.xml
+
+pdepend:
+# coverageReport: build/coverage-clover.xml
+
+phpmd:
+  standard: ./.phpmd.xml
+
+phpstan:
+  level: 3
+  standard: phpstan.neon
+
+phpcpd:
+  minLines: 5
+  minTokens: 70
+
+phpmetrics:
+  config: null
+  git: false
+
+psalm:
+  config: .psalm.xml
+  deadCode: false
+  threads: 2
+  showInfo: true
+  allowMissingFiles: true

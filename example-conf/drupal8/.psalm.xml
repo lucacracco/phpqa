@@ -3,12 +3,12 @@
         totallyTyped="false"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
+        resolveFromConfigFile="false"
         xsi:schemaLocation="https://getpsalm.org/schema/config file:///app/vendor/vimeo/psalm/config.xsd">
 
     <projectFiles>
         <ignoreFiles allowMissingFiles="true">
-            <directory name="node_modules" />
-            <directory name="web/modules/custom/*/tests" />
+            <directory name="./web/modules/custom/*/tests" />
         </ignoreFiles>
     </projectFiles>
 
@@ -24,7 +24,6 @@
         <MissingReturnType errorLevel="info" />
         <MissingPropertyType errorLevel="info" />
         <InvalidDocblock errorLevel="info" />
-        <MisplacedRequiredParam errorLevel="info" />
         <PropertyNotSetInConstructor errorLevel="info" />
         <MissingConstructor errorLevel="info" />
         <MissingClosureParamType errorLevel="info" />

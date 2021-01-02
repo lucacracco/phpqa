@@ -5,8 +5,6 @@ ENV TOOLS_LIBS="git graphviz make unzip nano zlib1g-dev libzip-dev libxslt-dev"
 ENV TARGET_DIR="/tools"
 ENV PATH="$PATH:$TARGET_DIR:$TARGET_DIR/vendor/bin"
 ENV COMPOSER_ALLOW_SUPERUSER 1
-#ENV COMPOSER_HOME=$TARGET_DIR/.composer
-#ENV COMPOSER_BIN_DIR=$COMPOSER_HOME/vendor/bin/
 
 # Include composer.
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -18,25 +16,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends $TOOLS_LIBS && 
  && echo "memory_limit=-1" >> $PHP_INI_DIR/php.ini \
  && rm -rf $COMPOSER_HOME/cache
 
-# Install projects.
+# Only for composer:1.
+#RUN composer global require hirak/prestissimo
+
+# Install phpqa tools projects.
 COPY composer.json $TARGET_DIR/composer.json
 RUN composer install --no-progress --working-dir=$TARGET_DIR
 
-COPY composer.phpqa.json $TARGET_DIR/phpqa/composer.json
-RUN composer install --no-progress --working-dir=$TARGET_DIR/phpqa
+# Install EdgedesignCZ/PHPQA old project.
+COPY edgedesign-phpqa $TARGET_DIR/edgedesign-phpqa
+RUN composer install --no-progress --working-dir=$TARGET_DIR/edgedesign-phpqa
 
-# Set the alias for PHPQA.
-RUN echo 'alias phpqa="$TARGET_DIR/phpqa/vendor/bin/phpqa"' >> ~/.bashrc
-
-## For Drupal.
-#RUN composer global require \
-#    #mglaman/phpstan-drupal:^0.12.7
-#    #mglaman/phpstan-drupal-deprecations
-
-## For Symfony
-#RUN composer global require  \
-#    phpstan/phpstan-symfony:0.12.10 \
-#    psalm/plugin-symfony:2.0.2
+# Set the alias for EdgedesignCZ PHPQA.
+RUN echo 'alias phpqa="$TARGET_DIR/edgedesign-phpqa/vendor/bin/phpqa"' >> ~/.bashrc
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

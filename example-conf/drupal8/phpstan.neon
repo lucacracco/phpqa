@@ -11,6 +11,5 @@ parameters:
   drupal:
     drupal_root: %currentWorkingDirectory%/web
 includes:
-    # Composer global libraries in image is installed in /tmp.
-    - /tmp/vendor/mglaman/phpstan-drupal/extension.neon
-    - /tmp/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - /tools/edgedesign-phpqa/vendor/mglaman/phpstan-drupal/extension.neon
+    - /tools/edgedesign-phpqa/vendor/phpstan/phpstan-deprecation-rules/rules.neon
