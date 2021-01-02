@@ -1,34 +1,27 @@
-FROM php:7.4-cli
+FROM jakzal/phpqa:php7.4
 LABEL Luca Cracco <lucacracco>
 
-ENV TOOLS_LIBS="git graphviz make unzip nano zlib1g-dev libzip-dev libxslt-dev"
-ENV TARGET_DIR="/tools"
-ENV PATH="$PATH:$TARGET_DIR:$TARGET_DIR/vendor/bin"
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-# Include composer.
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+ENV BUILD_DEPS="build-essential autoconf file g++ gcc libc-dev pkg-config"
+ENV TOOL_DEPS="nano"
+ENV LIB_DEPS="libxslt-dev"
 
 # Install extra software.
-RUN apt-get update && apt-get install -y --no-install-recommends $TOOLS_LIBS && rm -rf /var/lib/apt/lists/* \
- && docker-php-ext-install zip xsl \
- && echo "date.timezone=Europe/Rome" >> $PHP_INI_DIR/php.ini \
- && echo "memory_limit=-1" >> $PHP_INI_DIR/php.ini \
- && rm -rf $COMPOSER_HOME/cache
+RUN apt-get update && apt-get install -y --no-install-recommends $TOOL_DEPS $BUILD_DEPS $LIB_DEPS && rm -rf /var/lib/apt/lists/*
+RUN docker-php-ext-install xsl
+RUN echo "date.timezone=Europe/Rome" >> $PHP_INI_DIR/php.ini
+RUN echo "memory_limit=-1" >> $PHP_INI_DIR/php.ini
+RUN apt-get purge -y --auto-remove $BUILD_DEPS
 
-# Only for composer:1.
-#RUN composer global require hirak/prestissimo
+# Add extra libraries.
+# TODO remove 'psalm/plugin-symfony' after close the issue https://github.com/jakzal/toolbox/issues/235.
+RUN composer global require drupal/coder:^8.3 psalm/plugin-symfony:^2.1
 
-# Install phpqa tools projects.
-COPY composer.json $TARGET_DIR/composer.json
-RUN composer install --no-progress --working-dir=$TARGET_DIR
+# Install code sniffer of Drupal.
+RUN phpcs --config-set installed_paths "$(phpcs --config-show|grep installed_paths|awk '{ print $2 }'),/tools/.composer/vendor/drupal/coder/coder_sniffer,/tools/.composer/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis"
 
-# Install EdgedesignCZ/PHPQA old project.
-COPY edgedesign-phpqa $TARGET_DIR/edgedesign-phpqa
-RUN composer install --no-progress --working-dir=$TARGET_DIR/edgedesign-phpqa
+# Install EdgedesignCZ/PHPQA tool.
+COPY edgedesign-phpqa $TOOLBOX_TARGET_DIR/edgedesign-phpqa
+RUN composer install --no-progress --working-dir=$TOOLBOX_TARGET_DIR/edgedesign-phpqa
 
 # Set the alias for EdgedesignCZ PHPQA.
-RUN echo 'alias phpqa="$TARGET_DIR/edgedesign-phpqa/vendor/bin/phpqa"' >> ~/.bashrc
-
-ADD entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN echo 'alias phpqa="$TOOLBOX_TARGET_DIR/edgedesign-phpqa/vendor/bin/phpqa"' >> ~/.bashrc
