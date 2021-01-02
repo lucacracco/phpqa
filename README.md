@@ -14,7 +14,7 @@ Add it to your `~/.bashrc` so it's defined every time you start a new terminal s
 Now the command becomes a lot simpler:
 
 ```shell
-phpqa phpcs --standard=Drupal /file/to/drupal/example_module
+phpqa phpcs --standard=Drupal /file/to/example/directory
 ```
 
 ### Examples
@@ -39,6 +39,21 @@ phpqa phpcpd --min-lines 5 --min-tokens 70 --log-pmd "reports/phpcpd.xml" /file/
 **phpmetrics**
 ```shell
 phpqa phpmetrics --extensions=php,inc,module,install,test,profile,theme --report-html="reports/phpmetrics/" --report-violations="reports/phpmetrics.xml" /file/to/drupal/example_module
+```
+
+**composer-unused**
+```shell
+phpqa composer unused
+````
+
+**parallel-lint**
+```shell
+phpqa parallel-lint /file/to/example/directory
+````
+
+**pdpend**
+```shell
+phpqa pdepend --summary-xml=reports/pdepend.xml --jdepend-chart=reports/pdepend.svg --overview-pyramid=reports/pdepend-pyramid.svg /file/to/example/directory
 ```
 
 ### GitHub actions
