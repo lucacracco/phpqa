@@ -1,5 +1,8 @@
 # Docker PHP Quality Tools for PHP/Drupal/Symfony project.
 
+> The based image: [jakzal/phpqa](https://github.com/jakzal/phpqa).
+> See [jakzal/toolbox](https://github.com/jakzal/toolbox) for other information.
+
 ```shell
 docker run -it --rm -u $UID -v $PWD:/project -w /project lucacracco/phpqa bash
 ```
@@ -17,13 +20,13 @@ Now the command becomes a lot simpler:
 phpqa phpcs --standard=Drupal /file/to/example/directory
 ```
 
-### Examples
+### Examples (for Drupal)
 
 **phpcs**
 ```shell
 phpqa phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml /file/to/drupal/example_module
 phpqa phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml /file/to/drupal/example_module
-phpqa phpcs --standard=/phpqa/drupal8/.phpcs.xml --report=summary -p /file/to/drupal/example_module
+phpqa phpcs --standard=/tools/edgedesign-phpqa/drupal8/.phpcs.xml --report=summary -p /file/to/drupal/example_module
 ```
 
 **phpcbf**
@@ -106,7 +109,7 @@ explicitly invoked as in the above example.
 
 ## EdgedesignCZ PHPQA
 
-Repo: [https://github.com/EdgedesignCZ/phpqa/](https://github.com/EdgedesignCZ/phpqa/)
+Project: [https://github.com/EdgedesignCZ/phpqa/](https://github.com/EdgedesignCZ/phpqa/)
 Documentation: [https://edgedesigncz.github.io/phpqa](https://edgedesigncz.github.io/phpqa)
 
 ### Example

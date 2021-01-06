@@ -23,11 +23,6 @@ endif
 build:
 	docker build -t $(NAME) ./
 
-## push	:	Push image.
-.PHONY: push
-push:
-	docker push $(NAME)
-
 ## debug	:	Debug image.
 .PHONY: debug
 debug:
@@ -38,4 +33,4 @@ debug:
 run:
 	docker run --rm $(NAME) $(RUN_ARGS)
 
-release: build push
+release: build
