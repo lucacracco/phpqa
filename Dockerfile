@@ -14,7 +14,7 @@ RUN apt-get purge -y --auto-remove $BUILD_DEPS
 
 # Add extra libraries.
 # TODO remove 'psalm/plugin-symfony' after close the issue https://github.com/jakzal/toolbox/issues/235.
-RUN composer global require drupal/coder:^8.3 psalm/plugin-symfony:^2.1 
+RUN composer global require drupal/coder:^8.3 psalm/plugin-symfony:^2.1
 
 # Install code sniffer of Drupal.
 RUN phpcs --config-set installed_paths "$(phpcs --config-show|grep installed_paths|awk '{ print $2 }'),/tools/.composer/vendor/drupal/coder/coder_sniffer,/tools/.composer/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis"
@@ -24,4 +24,4 @@ COPY edgedesign-phpqa $TOOLBOX_TARGET_DIR/edgedesign-phpqa
 RUN composer install --no-progress --working-dir=$TOOLBOX_TARGET_DIR/edgedesign-phpqa
 
 # Set the alias for EdgedesignCZ PHPQA.
-RUN echo 'alias phpqa="/tools/edgedesign-phpqa/vendor/bin/phpqa"' >> ~/.bashrc
+RUN echo "alias phpqa='$TOOLBOX_TARGET_DIR/edgedesign-phpqa/vendor/bin/phpqa'" >> ~/.bashrc
