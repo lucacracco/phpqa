@@ -38,7 +38,8 @@
   "extra": {
     "patches": {
       "edgedesign/phpqa": {
-        "Compatiblity Composer2.0": "composer2.patch"
+        "Compatiblity Composer2.0": "composer2.patch",
+        "Add an analizer for https://github.com/fabpot/local-php-security-checker": "security-checker.patch"
       }
     }
   }
