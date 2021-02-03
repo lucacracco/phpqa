@@ -1,9 +1,9 @@
 diff --git a/src/Tools/Analyzer/PHPSecurityChecker.php b/src/Tools/Analyzer/PHPSecurityChecker.php
 new file mode 100644
-index 0000000..8b71f6a
+index 0000000..a7357a2
 --- /dev/null
 +++ b/src/Tools/Analyzer/PHPSecurityChecker.php
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,19 @@
 +<?php
 +
 +namespace Edge\QA\Tools\Analyzer;
@@ -13,26 +13,13 @@ index 0000000..8b71f6a
 +class PHPSecurityChecker extends \Edge\QA\Tools\Tool
 +{
 +    public static $SETTINGS = array(
-+        'optionSeparator' => '=',
-+        'internalClass' => 'SensioLabs\Security\SecurityChecker',
 +        'outputMode' => OutputMode::RAW_CONSOLE_OUTPUT,
-+        'composer' => 'sensiolabs/security-checker',
 +    );
 +
 +    public function __invoke()
 +    {
-+        $composerLock = getcwd() . "/composer.lock";
-+        foreach ($this->options->getAnalyzedDirs() as $escapedDir) {
-+            $dir = rtrim(trim($escapedDir, '"'), '/');
-+            $path = "{$dir}/composer.lock";
-+            if (file_exists($path)) {
-+                $composerLock = $path;
-+                break;
-+            }
-+        }
 +        return [
-+            'security:check',
-+            $composerLock,
++            '--path=/var/www/html/composer.lock',
 +        ];
 +    }
 +}
