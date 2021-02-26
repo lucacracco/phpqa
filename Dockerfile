@@ -12,16 +12,18 @@ RUN echo "date.timezone=Europe/Rome" >> $PHP_INI_DIR/php.ini
 RUN echo "memory_limit=-1" >> $PHP_INI_DIR/php.ini
 RUN apt-get purge -y --auto-remove $BUILD_DEPS
 
+## Install EdgedesignCZ/PHPQA and tools.
+RUN composer global require edgedesign/phpqa --update-no-dev
+
+RUN composer global require friendsofphp/php-cs-fixer \
+    php-parallel-lint/php-parallel-lint \
+    enlightn/security-checker \
+    phpstan/phpstan nette/neon \
+    phpunit/phpunit
+
 # Add extra libraries.
 # TODO remove 'psalm/plugin-symfony' after close the issue https://github.com/jakzal/toolbox/issues/235.
 RUN composer global require drupal/coder:^8.3 psalm/plugin-symfony:^2.1
 
 # Install code sniffer of Drupal.
 RUN phpcs --config-set installed_paths "$(phpcs --config-show|grep installed_paths|awk '{ print $2 }'),/tools/.composer/vendor/drupal/coder/coder_sniffer,/tools/.composer/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis"
-
-# Install EdgedesignCZ/PHPQA tool.
-COPY edgedesign-phpqa $TOOLBOX_TARGET_DIR/edgedesign-phpqa
-RUN composer install --no-progress --working-dir=$TOOLBOX_TARGET_DIR/edgedesign-phpqa
-
-# Set the alias for EdgedesignCZ PHPQA.
-RUN echo "alias phpqa='$TOOLBOX_TARGET_DIR/edgedesign-phpqa/vendor/bin/phpqa'" >> ~/.bashrc
