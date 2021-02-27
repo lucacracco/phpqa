@@ -8,8 +8,8 @@ parameters:
     - '#Plugin definitions cannot be altered.#'
     - '#Missing cache backend declaration for performance.#'
     - '#Plugin manager has cache backend specified but does not declare cache tags.#'
-  drupal:
-    drupal_root: %currentWorkingDirectory%/web
+#  drupal:
+#    drupal_root: %currentWorkingDirectory%/web
 includes:
-    - /tools/edgedesign-phpqa/vendor/mglaman/phpstan-drupal/extension.neon
-    - /tools/edgedesign-phpqa/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+#    - /tools/.composer/vendor-bin/drupal/vendor/mglaman/phpstan-drupal/extension.neon
+    - /tools/.composer/vendor/phpstan/phpstan-deprecation-rules/rules.neon

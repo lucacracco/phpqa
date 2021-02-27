@@ -14,7 +14,7 @@ phpqa:
     - pdepend
     - phpcpd
     - security-checker
-    #    # Require composer autoload. Active only if have installed libraries dependencies of project.
+#    # Require composer autoload. Active only if have installed libraries dependencies of project.
     - phpstan
     - psalm
   extensions:

@@ -3,4 +3,4 @@ parameters:
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: false
 includes:
-    - /tools/edgedesign-phpqa/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - /tools/.composer/vendor/phpstan/phpstan-deprecation-rules/rules.neon

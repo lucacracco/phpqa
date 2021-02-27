@@ -12,18 +12,33 @@ RUN echo "date.timezone=Europe/Rome" >> $PHP_INI_DIR/php.ini
 RUN echo "memory_limit=-1" >> $PHP_INI_DIR/php.ini
 RUN apt-get purge -y --auto-remove $BUILD_DEPS
 
-## Install EdgedesignCZ/PHPQA and tools.
+## Install EdgedesignCZ/PHPQA.
 RUN composer global require edgedesign/phpqa --update-no-dev
 
-RUN composer global require friendsofphp/php-cs-fixer \
+# Suggestions tools for EdgedesignCZ/PHPQA
+RUN composer global require \
+    friendsofphp/php-cs-fixer \
     php-parallel-lint/php-parallel-lint \
     enlightn/security-checker \
-    phpstan/phpstan nette/neon \
+    phpstan/phpstan \
+    nette/neon \
     phpunit/phpunit
 
 # Add extra libraries.
-# TODO remove 'psalm/plugin-symfony' after close the issue https://github.com/jakzal/toolbox/issues/235.
-RUN composer global require drupal/coder:^8.3 psalm/plugin-symfony:^2.1
+RUN composer global require \
+    friendsofphp/php-cs-fixer \
+    vimeo/psalm \
+    phpstan/phpstan-deprecation-rules \
+    psalm/plugin-symfony \
+    phpstan/phpstan-symfony \
+    drupal/coder
 
-# Install code sniffer of Drupal.
+#RUN composer global bin drupal require \
+#    mglaman/phpstan-drupal
+
+# Install https://github.com/Dealerdirect/phpcodesniffer-composer-installer.
+# I don't know but works for edgedesign/phpqa.
+RUN composer global require dealerdirect/phpcodesniffer-composer-installer
+
+# I don't know but works for global phpcs.
 RUN phpcs --config-set installed_paths "$(phpcs --config-show|grep installed_paths|awk '{ print $2 }'),/tools/.composer/vendor/drupal/coder/coder_sniffer,/tools/.composer/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis"

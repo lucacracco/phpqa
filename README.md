@@ -4,13 +4,13 @@
 > See [jakzal/toolbox](https://github.com/jakzal/toolbox) for other information.
 
 ```shell
-docker run -it --rm -u $UID -v $PWD:/project -w /project lucacracco/phpqa bash
+docker run -it --rm -v $PWD:/project -w /project lucacracco/phpqa bash
 ```
 
 You might want to tweak this command to your needs and create an alias for convenience:
 
 ```shell
-alias phpqa='docker run --init -it --rm -v "$(pwd):/project" -w /project lucacracco/phpqa'
+alias phpqa='docker run -it --rm -v "$(pwd):/project" -w /project lucacracco/phpqa'
 ```
 
 Add it to your `~/.bashrc` so it's defined every time you start a new terminal session.
@@ -114,17 +114,4 @@ Documentation: [https://edgedesigncz.github.io/phpqa](https://edgedesigncz.githu
 
 ### Example
 
-`phpqa --config=.phpqa` in [lucacracco/project-starterkit:drupal-8.x](https://github.com/lucacracco/project-starterkit)
-
-| Tool             | Allowed Errors | Errors count | Is OK? | HTML report                   |
----------------------------------------------------------------------------------------------
-| phpmetrics       |                |              | ✓      | reports/phpmetrics/index.html |
-| phploc           |                |              | ✓      | reports/phploc.html           |
-| phpcs            |                | 0            | ✓      | reports/phpcs.html            |
-| phpmd            |                | 0            | ✓      | reports/phpmd.html            |
-| pdepend          |                |              | ✓      | reports/pdepend.html          |
-| phpcpd           |                | 0            | ✓      | reports/phpcpd.html           |
-| security-checker |                | 0            | ✓      | reports/security-checker.html |
-| phpstan          |                | 0            | ✓      | reports/phpstan.html          |
-| psalm            |                | 0            | ✓      | reports/psalm.html            |
-| phpqa            |                | 0            | ✓      | reports/phpqa.html            |
+`phpqa --config=phpqa` in [lucacracco/project-starterkit:drupal-8.x](https://github.com/lucacracco/project-starterkit)

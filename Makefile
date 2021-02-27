@@ -32,5 +32,3 @@ debug:
 .PHONY: run
 run:
 	docker run --rm $(NAME) $(RUN_ARGS)
-
-release: build
