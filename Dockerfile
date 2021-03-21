@@ -33,8 +33,9 @@ RUN composer global require \
     phpstan/phpstan-symfony \
     drupal/coder
 
-#RUN composer global bin drupal require \
-#    mglaman/phpstan-drupal
+# The library requires symfony/yaml ~3.4.5|^4.2, we force the downgrades.
+RUN composer global require \
+    mglaman/phpstan-drupal --with-all-dependencies
 
 # Install https://github.com/Dealerdirect/phpcodesniffer-composer-installer.
 # I don't know but works for edgedesign/phpqa.
