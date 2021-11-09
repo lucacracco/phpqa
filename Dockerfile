@@ -41,5 +41,7 @@ RUN composer global require \
 # I don't know but works for edgedesign/phpqa.
 RUN composer global require dealerdirect/phpcodesniffer-composer-installer
 
+RUN composer global require qossmic/deptrac-shim
+
 # I don't know but works for global phpcs.
 RUN phpcs --config-set installed_paths "$(phpcs --config-show|grep installed_paths|awk '{ print $2 }'),/tools/.composer/vendor/drupal/coder/coder_sniffer,/tools/.composer/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis"
