@@ -1,0 +1,30 @@
+Index: src/Tools/Analyzer/Phpstan.php
+<+>UTF-8
+===================================================================
+diff --git a/src/Tools/Analyzer/Phpstan.php b/src/Tools/Analyzer/Phpstan.php
+--- a/src/Tools/Analyzer/Phpstan.php	(revision d34ac1c9d7a82e79c726e4561b38b33fc40bd491)
++++ b/src/Tools/Analyzer/Phpstan.php	(date 1629276478072)
+@@ -32,19 +32,19 @@
+         if (file_exists($defaultConfig)) {
+             $config = \Nette\Neon\Neon::decode(file_get_contents($defaultConfig));
+             $config['parameters'] += [
+-                'excludes_analyse' => [],
++                'excludePaths' => [],
+             ];
+         } else {
+             $config = [
+                 'parameters' => [
+                     'autoload_directories' => $createAbsolutePaths($this->options->getAnalyzedDirs()),
+-                    'excludes_analyse'     => [],
++                    'excludePaths'     => [],
+                 ],
+             ];
+         }
+ 
+-        $config['parameters']['excludes_analyse'] = array_merge(
+-            $config['parameters']['excludes_analyse'],
++        $config['parameters']['excludePaths'] = array_merge(
++            $config['parameters']['excludePaths'],
+             $createAbsolutePaths($this->options->ignore->phpstan())
+         );
+ 
